@@ -1,0 +1,12 @@
+<!-- nav bar component -->
+<app-navbar></app-navbar>
+<!-- router outlet -->
+<router-outlet ></router-outlet>
+<!-- loading screen component -->
+<ngx-spinner
+bdColor="rgba(240,240,240,0.85)"
+size="small"
+template="<img src='../assets/images/wallet.png' width='250'/>">
+</ngx-spinner>
+<!-- floating button to add a new transaction -->
+<app-new-transaction-button *ngIf="showButton"></app-new-transaction-button>

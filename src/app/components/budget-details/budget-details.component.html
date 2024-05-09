@@ -1,0 +1,55 @@
+<section class="px-10 py-14">
+  <!-- budget cards -->
+  <div
+    class="w-full px-6 mb-6 border-l-4 border-yellow-400 rounded-r-3xl max-w-6xl shadow-lg shadow-gray-300 bg-slate-50"
+    *ngFor="let budget of budgetsCards">
+    <div class="py-3 ">
+      <div class="flex items-center py-3">
+        <div class="space-y-3 flex-1">
+          <div class="flex items-center justify-around">
+            <!-- budget name -->
+            <div class="flex justify-start mx-2 sm:mx-0 text-sm md:text-base ">
+              <h4 class="font-semibold mr-auto text-gray-700  ">{{budget.budgetName}}</h4>
+            </div>
+            <!-- budget amount -->
+            <div class="md:flex justify-evenly  mx-2 sm:mx-0 text-sm md:text-base text-center">
+              <span class="mr-2 font-semibold md:font-bold text-black">Budget amonut:</span>
+              <h4 class="font-semibold mr-auto text-yellow-500  ">
+                {{budget.amount}}
+              </h4>
+            </div>
+            <!-- budget for -->
+            <div class="md:flex justify-evenly  mx-2 sm:mx-0 text-sm md:text-base text-center">
+              <span class="mr-2 font-semibold md:font-bold text-black">Budget for:</span>
+              <h4 class="font-semibold mr-auto text-yellow-500  ">
+                {{budget.budgetFor}}
+              </h4>
+            </div>
+            <!-- percentage and delete -->
+            <div class="md:flex justify-evenly mx-2 sm:mx-0 text-sm md:text-base">
+              <div class="flex justify-end">
+                <span class="px-2 py-1 rounded-lg text-white font-normal md:font-semibold text-sm" 
+                [ngClass]="{'bg-green-500': (calculateProgress(budget) * 100) < 70 ,
+                   'bg-yellow-500': (calculateProgress(budget) * 100) >= 70  && (calculateProgress(budget) * 100) < 90 ,
+                   'bg-red-500': (calculateProgress(budget) * 100) >= 90  && (calculateProgress(budget) * 100) < 100 , 
+                   'bg-red-800': (calculateProgress(budget) * 100) >= 100 }">
+                {{ (calculateProgress(budget) * 100).toFixed(0) }}%
+              </span>
+            </div>
+              <div class="mt-2 md:mt-0">
+                <span
+                  class="px-2 py-1 md:ml-3 rounded-lg bg-black text-white font-normal md:font-semibold text-sm hover:bg-black/70 cursor-pointer"
+                  (click)="deleteItemFromArray(budgetsCards,budget)">Delete</span>
+              </div>
+            </div>
+          </div>
+          <!-- progress bar -->
+          <div class="overflow-hidden bg-gray-200 h-1.5 rounded-full w-full">
+            <span class="h-full bg-blue-300 w-full block rounded-full"
+              [style.width]="calculateProgress(budget) * 100 + '%' "></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

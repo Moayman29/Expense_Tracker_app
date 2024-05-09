@@ -1,0 +1,96 @@
+<section>
+    <div class="flex justify-center md:mx-20 md:mt-6">
+        <h3 class="mt-2 md:m-0 font-semibold md:font-bold text-lg md:text-xl lg:text-2xl">Filter Search</h3>
+    </div>
+    <!-- filter search -->
+    <div class="mt-3 md:mt-5 py-3 grid justify-center xl:flex xl:justify-evenly xl:items-center bg-gray-200">
+        <!-- date search -->
+        <div class="mb-2 md:mb-0 lg:mb-2 sm:flex sm:justify-between md:justify-center lg:items-center ">
+            <div class="sm:mr-3 mb-2 lg:mb-0">
+                <label for="date-from" class="mr-2 font-semibold">From:</label>
+                <input type="date" [(ngModel)]="dateFromSearch" name="date-from"
+                    class="px-4 py-1 text-gray-800 bg-white rounded-lg border-2 border-gray-500 focus:outline-none focus:border-yellow-200">
+            </div>
+            <div>
+                <label for="date-to" class="mr-7 sm:mr-2 font-semibold">To:</label>
+                <input type="date" [(ngModel)]="datetoSearch" name="date-from"
+                    class="px-4 py-1 text-gray-800 bg-white rounded-lg border-2 border-gray-500 focus:outline-none focus:border-yellow-200">
+            </div>
+        </div>
+        <div class="block md:flex">
+            <!-- category search -->
+            <div class="mb-2 md:flex md:flex-col md:items-center lg:block ">
+                <label for="category-search" class="mr-2 lg:mr-2 font-semibold">Category:</label>
+                <select [(ngModel)]="categorySearch" name="category-search"
+                    class="px-4 py-1 text-gray-800 bg-white rounded-lg border-2 border-gray-500 focus:outline-none focus:border-yellow-200">
+                    <option value="food and drink" class="bg-yellow-100">Food and drink</option>
+                    <option value="shopping" class="bg-yellow-100">Shopping</option>
+                    <option value="transportation" class="bg-yellow-100">Transportation</option>
+                    <option value="housing" class="bg-yellow-100">Housing</option>
+                    <option value="entertainment" class="bg-yellow-100">Entertainment</option>
+                    <option value="education" class="bg-yellow-100">Education</option>
+                    <option value="healthcare" class="bg-yellow-100">Healthcare</option>
+                    <option value="car" class="bg-yellow-100">Car</option>
+                </select>
+            </div>
+            <!-- amount search -->
+            <div class="mb-2 md:flex md:flex-col md:items-center lg:block lg:ml-5">
+                <label for="amount-search" class="mr-4 lg:mr-2 font-semibold">Amount:</label>
+                <input type="search" [(ngModel)]="amountSearch" name="amount-search"
+                    class="px-4 py-1 text-gray-800 w-2/3 bg-white rounded-lg border-2 border-gray-500 focus:outline-none focus:border-yellow-200"
+                    placeholder="Enter amount ">
+            </div>
+            <!-- payment method search -->
+            <div class="mb-2 md:flex md:flex-col md:items-center lg:block ">
+                <label for="payment-search" class="mr-3 lg:mr-2 font-semibold">Payment:</label>
+                <select [(ngModel)]="paymentSearch" name="payment-search"
+                    class="px-4 py-1 text-gray-800 bg-white rounded-lg border-2 border-gray-500 focus:outline-none focus:border-yellow-200">
+                    <option value="in cash" class="bg-yellow-100">In Cash</option>
+                    <option value="credit card" class="bg-yellow-100">Credit Card</option>
+                    <option value="debit card" class="bg-yellow-100">Debit Card</option>
+                    <option value="online payment" class="bg-yellow-100">Online Payment</option>
+                </select>
+            </div>
+        </div>
+        <!-- clear search fields button -->
+        <div class="xl:pb-2 flex justify-center">
+            <button class="bg-gray-800 text-white rounded-lg px-2 py-1 hover:bg-yellow-500 transition-all duration-500
+            w-1/2 md:w-1/4 xl:w-auto" (click)="clearFilter()">Clear</button>
+        </div>
+    </div>
+    <!-- table of transactions -->
+    <div class="flex justify-center md:mx-20 md:mt-6">
+        <h3 class="font-semibold md:font-bold mt-2 md:m-0 text-lg md:text-xl lg:text-2xl">My Transactions</h3>
+    </div>
+    <div class="px-2 md:px-4 mt-4 lg:mt-7 w-full">
+        <div class="mb-10 relative h-44 md:h-72 lg:h-96 overflow-y-scroll">
+            <table class="min-w-full text-sm text-left text-gray-500 ">
+                <thead class="text-xs md:text-sm lg:text-base text-gray-700 uppercase bg-gray-50 ">
+                    <tr>
+                        <th class="py-1 px-1 md:py-3 md:px-6">Date</th>
+                        <th class="py-1 px-1 md:py-3 md:px-6">Category</th>
+                        <th class="py-1 px-1 md:py-3 md:px-6">Amount</th>
+                        <th class="py-1 px-1 md:py-3 md:px-6">Payment Method</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b bg-gray-200"
+                        *ngFor="let transactionItem of transactionsTable | categorySearch : categorySearch 
+                        | paymentSearch : paymentSearch | amountSearch : amountSearch | dateSearch : dateFromSearch : datetoSearch">
+                        <td class="py-1 px-1 md:py-4 md:px-6 md:font-semibold">{{transactionItem.date}}</td>
+                        <td class="py-1 px-1 md:py-4 md:px-6 md:font-semibold">{{transactionItem.category}}</td>
+                        <td class="py-1 px-1 md:py-4 md:px-6 font-semibold"
+                            [ngClass]="transactionItem.type === 'income'? 'text-green-500': 'text-red-500'">
+                            <i *ngIf="transactionItem.type == 'income'"
+                                class="fa-solid fa-plus text-green-500 md:mr-1"></i>
+                            <i *ngIf="transactionItem.type == 'expense'"
+                                class="fa-solid fa-minus text-red-500 md:mr-1"></i>
+                            {{transactionItem.amount}}<i class="fa-solid fa-sterling-sign md:ml-1"></i>
+                        </td>
+                        <td class="py-1 px-1 md:py-4 md:px-6 md:font-semibold">{{transactionItem.paymentMethod}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

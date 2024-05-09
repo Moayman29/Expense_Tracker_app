@@ -1,0 +1,91 @@
+<section>
+    <div class="shadow-xl p-5 bg-gray-300 rounded-md  backdrop-filter backdrop-blur-sm bg-opacity-60 
+    absolute -translate-x-2/4 -translate-y-[40%] left-2/4 top-[55%] w-full ">
+        <h4 class="text-center font-semibold bg-white rounded-full p-2">Add New Budget</h4>
+        <div class="max-w-2xl mt-10 mx-auto">
+            <form (ngSubmit)="handleBudgetAction()" [formGroup]="addBudgetForm">
+                <!-- budget name -->
+                <div class="relative z-0 mb-8 w-full group">
+                    <input type="text" formControlName="budgetName"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-yellow-300 peer"
+                        placeholder=" " />
+                    <label for="budget-name" class="absolute text-sm text-gray-500 
+                duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] 
+                peer-focus:left-0 peer-focus:text-yellow-500 peer-placeholder-shown:scale-100 
+                peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Budget Name</label>
+                <!-- error message -->
+                <div *ngIf="addBudgetForm.get('budgetName')?.getError('maxlength')" class="text-red-600">
+                    Name must be 20 characters max!
+                </div>
+                </div>
+                <!-- amount -->
+                <div class="relative z-0 mb-8 w-full group">
+                    <input type="number" formControlName="amount"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-yellow-300 peer"
+                        placeholder=" " />
+                    <label for="amount" class="absolute text-sm text-gray-500 
+                duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] 
+                peer-focus:left-0 peer-focus:text-yellow-500 peer-placeholder-shown:scale-100 
+                peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Amount</label>
+                    <i class="fa-solid fa-sterling-sign absolute top-4 right-10"></i>
+                </div>
+                <!-- budget for -->
+                <div class="relative z-0 mb-8 w-full group">
+                    <select formControlName="budgetFor" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-black appearance-none 
+                    focus:outline-none focus:ring-0 focus:border-yellow-500 peer" placeholder=" ">
+                        <option value="food and drink" class="bg-yellow-100">Food and drink</option>
+                        <option value="shopping" class="bg-yellow-100">Shopping</option>
+                        <option value="transportation" class="bg-yellow-100">Transportation</option>
+                        <option value="housing" class="bg-yellow-100">Housing</option>
+                        <option value="entertainment" class="bg-yellow-100">Entertainment</option>
+                        <option value="education" class="bg-yellow-100">Education</option>
+                        <option value="healthcare" class="bg-yellow-100">Healthcare</option>
+                        <option value="car" class="bg-yellow-100">Car</option>
+                    </select>
+                    <label for="budgetFor" class="absolute text-sm text-gray-500 
+                duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] 
+                peer-focus:left-0 peer-focus:text-yellow-500 peer-placeholder-shown:scale-100 
+                peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Budget For</label>
+                </div>
+
+                <!-- date from -->
+                <div class="relative z-0 mb-8 w-full group">
+                    <input type="date" formControlName="dateFrom"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-yellow-500 peer"
+                        placeholder=" " />
+                    <label for="budget-period" class="absolute text-sm text-gray-500 
+                duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] 
+                peer-focus:left-0 peer-focus:text-yellow-500 peer-placeholder-shown:scale-100 
+                peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Date from</label>
+                    <!-- error message -->
+                    <div *ngIf="addBudgetForm.getError('dateRange')" class="text-red-600">
+                        Date cannot surpass the second date!
+                    </div>
+                </div>
+
+                <!-- date to -->
+                <div class="relative z-0 mb-8 w-full group">
+                    <input type="date" formControlName="dateTo"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-yellow-500 peer"
+                        placeholder=" " />
+                    <label for="budget-period" class="absolute text-sm text-gray-500 
+                duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] 
+                peer-focus:left-0 peer-focus:text-yellow-500 peer-placeholder-shown:scale-100 
+                peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Date to</label>
+                </div>
+
+                <!-- save and cancel buttons -->
+                <div class="flex justify-around xl:justify-between ">
+                    <button type="submit" class="text-black bg-yellow-300 ring-0 ring-gray-500 md:hover:ring-8 ring-opacity-30 duration-200 
+                font-medium rounded-lg text-sm w-auto px-3 py-1 md:px-4 md:py-1.5 lg:px-5 lg:py-2.5 text-center
+                    disabled:cursor-not-allowed disabled:bg-yellow-300/30 disabled:text-black/20 disabled:hover:ring-0"
+                        [disabled]="addBudgetForm.invalid">Save Budget</button>
+
+                    <button class="text-black bg-yellow-300 ring-0 ring-gray-500 md:hover:ring-8 ring-opacity-30 duration-200 
+                    font-medium rounded-lg text-sm w-auto px-3 py-1 md:px-4 md:py-1.5 lg:px-5 lg:py-2.5 text-center"
+                        (click)="this.close.emit()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

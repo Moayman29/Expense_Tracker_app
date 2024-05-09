@@ -1,0 +1,12 @@
+<button
+    class="btn lg:w-64 bg-yellow-300 text-gray-900 py-4 px-5 rounded-full lg:py-4 lg:px-4 lg:rounded-xl font-bold uppercase 
+fixed bottom-10 right-10 lg:bottom-10 lg:right-16 ring-0 ring-gray-500 lg:hover:ring-8 ring-opacity-30 duration-200 shadow-lg"
+    [routerLink]="['/newtransaction']" (longPress)="toggleLabel()">
+    <i class="fa-solid fa-plus lg:mr-3"></i>
+    <span class="hidden lg:inline-block">Add New Transaction</span>
+    <!-- a label that appears on long press on the add new transaction button on small screens -->
+    <span [hidden]="hideLabel" 
+        class="absolute font-normal right-14 top-2.5 w-52 p-1 bg-slate-300 rounded-xl lg:hidden cursor-text">Add New Transaction
+        <i class="absolute -top-0.5 -right-2 text-3xl text-slate-300 fa-solid fa-caret-right"></i>
+    </span>
+</button>

@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* a style for active router links */
+.active-color{
+  @apply bg-black p-2.5 rounded-full text-white transition-colors duration-500 hover:ring-transparent;
+}
+/* a style for active router links in drop down menu */
+.drop-color{
+  @apply bg-black p-2.5 rounded-full text-white transition-colors duration-500 !important;
+}

@@ -1,0 +1,21 @@
+<div class="pt-20 md:pt-24 lg:pt-28">
+    <!-- header with title and button to create a new budget -->
+    <div>
+        <div class="h-32 px-4 md:px-0 bg-gray-100 flex items-center justify-around">
+            <div class="px-4">
+                <p class=" md:text-lg font-semibold md:font-bold text-center">Set budgets to track your expenses</p>
+            </div>
+            <div class="flex justify-center">
+                <div class="w-fit px-4 py-1 sm:px-5 sm:py-2 md:px-6 md:py-3 text-center text-black rounded-full font-semibold md:font-bold uppercase cursor-pointer
+                ring-0 ring-gray-500 hover:bg-yellow-300 hover:ring-8 ring-opacity-30 duration-200 shadow-lg"
+                    (click)="openDialog()">Add New Budget</div>
+            </div>
+        </div>
+    </div>
+    <!-- section that displays the budgets made -->
+    <app-budget-details [budgets]="budgets"></app-budget-details>
+    <!-- a dialog that appears when clicking the "add new budget" button -->
+    <app-dialog *ngIf="showDialog" [budgets]="budgets" (close)="handleCloseDialog()"
+        class="absolute -translate-x-2/4 -translate-y-2/4 left-2/4 top-2/4 w-3/4 md:w-2/3 lg:w-1/2">
+    </app-dialog>
+</div>

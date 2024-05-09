@@ -1,0 +1,21 @@
+<div class="pt-20 md:pt-24 lg:pt-28">
+    <!-- a header with two buttons to choose between expense and income transactions -->
+    <div class="h-32 bg-gray-100 flex items-center justify-around">
+        <div class="w-1/2 flex justify-center">
+            <div class="w-fit px-6 py-3 text-black rounded-full font-bold uppercase cursor-pointer
+             ring-0 ring-gray-500 md:hover:ring-8 ring-opacity-30 duration-200 shadow-lg"
+             (click)="choseExpenseAction()" [ngClass]="expenseActionChosen==true? ['text-white' , 'bg-black']: null " 
+             >Expense</div>
+        </div>
+        <div class="w-1/2 flex justify-center border-l-2 border-black">
+            <div class="w-fit px-6 py-3 text-black rounded-full font-bold uppercase cursor-pointer
+             ring-0 ring-gray-500 md:hover:ring-8 ring-opacity-30 duration-200 shadow-lg"
+             (click)="choseIncomeAction()" [ngClass]="incomeActionChosen==true? ['text-white' , 'bg-black'] : null " 
+             >Income</div>
+        </div>
+    </div>
+</div>
+<!-- expense transaction form -->
+<app-expense-action *ngIf="expenseActionChosen"></app-expense-action>
+<!-- income transaction form -->
+<app-income-action *ngIf="incomeActionChosen"></app-income-action>
