@@ -25,7 +25,6 @@ import { DateSearchPipe } from './pipes/date-search/date-search.pipe';
 import { LongPressDirective } from './directives/long-press/long-press.directive';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -54,7 +53,6 @@ import { NgChartsModule } from 'ng2-charts';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    NgChartsModule,
     FormsModule,
     NgxSpinnerModule,
     BrowserAnimationsModule

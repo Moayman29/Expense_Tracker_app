@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Chart } from 'chart.js/dist';
+import { Chart } from 'chart.js/auto';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Transaction } from 'src/app/classes/transaction/transaction';
 import { TrackerService } from 'src/app/services/tracker/tracker.service';
@@ -19,38 +19,37 @@ export class ExpenseReportComponent implements OnInit {
   chartData: any = {};
   descendingLabelsArr!: string[];
 
-  canvas!:any;
-  
+  canvas!: any;
+
   ngOnInit(): void {
     this._spinner.show();
     this.transactionsArr = this._trackerServ.getTransactions(); // gets all transactions
     setTimeout(() => {
       this._spinner.hide();
-    }, 1000);    
-    
-    this.canvas = document.getElementById('transactionChartExpense') as HTMLCanvasElement;
+    }, 1000);
+
+    this.canvas = document.getElementById(
+      'transactionChartExpense'
+    ) as HTMLCanvasElement;
     this.prepareChartData();
-    
-    
+
     if (this.canvas) {
       const canvasContect = this.canvas.getContext('2d');
       // sets the chart configuration
       new Chart(canvasContect!, {
+        options: { responsive: true, maintainAspectRatio: true },
         type: 'doughnut',
         data: this.chartData,
-        responsive: true,
-        maintainAspectRatio: true,
       });
-    }else{
+    } else {
       console.log('canvas element not found');
     }
-    
   }
 
   // a method to set the data displayed in the chart
   prepareChartData() {
     // sorting transactions by amount in descending order
-    this.transactionsArr.sort((a, b) => b.amount - a.amount);    
+    this.transactionsArr.sort((a, b) => b.amount - a.amount);
     // group transactions by category and sum their amounts
     let categoryAmounts: Record<string, number> = {};
 
@@ -77,6 +76,5 @@ export class ExpenseReportComponent implements OnInit {
         },
       ],
     };
-    
   }
 }
